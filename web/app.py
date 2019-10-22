@@ -11,14 +11,14 @@ def crearIndicador():
 
 @app.route('/listarIndicador',methods=['GET'])
 def ListarIndicador():
-    sensores_list = requests.get('http://localhost:5000/indicadores').json()
+    sensores_list = requests.get('https://api-evergreen-771.azurewebsites.net/indicadores').json()
     return render_template('listarIndicadores.html',indicador=indicadores_list)
 
 @app.route('/guardarIndicador',methods=['POST'])
 def guardarIndicador():
     sensor = dict(request.values)
     sensor['prioridad'] = int(sensor['prioridad'])
-    request.post('http://localhost:5000/indicadores',json=sensor)
+    request.post('https://api-evergreen-771.azurewebsites.net/indicadores',json=sensor)
     return(listarIndicadores())
 
 app.run(port=8080,debug=True)
